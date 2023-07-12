@@ -21,11 +21,11 @@ export default function Home() {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const chatHistory = [...conversation, { role: "assistant", content: value }];
-      const response = await fetch("/api/gpt", {
-        method: "POST",
+      const chatHistory = [...conversation, { role: 'assistant', content: value }];
+      const response = await fetch('/api/gpt', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ messages: chatHistory }),
       });
@@ -34,7 +34,7 @@ export default function Home() {
       setValue('');
       setConversation([
         ...chatHistory,
-        { role: "user", content: data.item },
+        { role: 'user', content: data.item },
       ]);
     }
   };

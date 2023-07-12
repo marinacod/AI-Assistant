@@ -21,7 +21,7 @@ export default function Home() {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const chatHistory = [...conversation, { role: 'user', content: value }];
+      const chatHistory = [...conversation, { role: 'assistant', content: value }];
       const response = await fetch('/api/gpt', {
         method: 'POST',
         headers: {
@@ -34,7 +34,7 @@ export default function Home() {
       setValue('');
       setConversation([
         ...chatHistory,
-        { role: "assistant", content: data.item },
+        { role: "user", content: data.item },
       ]);
     }
   };
@@ -52,7 +52,7 @@ export default function Home() {
         <p className="mb-6 font-bold">Please type your prompt</p>
         <input
           placeholder="Type here"
-          className="w-full max-w-xs input input-bordered input-secondary"
+          className="w-full max-w-xs input input-bordered input-secondary dark:bg-slate-800"
           value={value}
           onChange={handleInput}
           onKeyDown={handleKeyDown}

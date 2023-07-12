@@ -5,12 +5,10 @@ import openai from "@/app/_utils/openai";
 export async function POST(req: NextRequest, res: NextResponse) {
   
   const body = await req.json();
-  const text = body.text;
-  const chatCompletion = await openai.createChatCompletion({
+  const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{role: "user", content: `${text}`}]
+    messages: body.messages
   })
-  const responseText = chatCompletion.data.choices[0].message.content;
-  // console.log(responseText);
+  const responseText = completion.data.choices[0].message.content;
   return NextResponse.json({ item: responseText });
 }

@@ -22,19 +22,19 @@ export default function Home() {
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const chatHistory = [...conversation, { role: 'user', content: value }];
-      const response = await fetch('/api/openAIChat', {
+      const response = await fetch('/api/gpt', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ messages: chatHistory }),
+        body: JSON.stringify({ text: value }),
       });
 
       const data = await response.json();
       setValue('');
       setConversation([
         ...chatHistory,
-        { role: 'assistant', content: data.result.choices[0].message.content },
+        { role: "assistant", content: data.item },
       ]);
     }
   };
@@ -68,7 +68,7 @@ export default function Home() {
         {conversation.map((item, index) => (
           <React.Fragment key={index}>
             <br />
-            {item.role === 'assistant' ? (
+            {item.role === 'user' ? (
               <div>
                 <div>
                   <strong>AI Assistant</strong>

@@ -21,8 +21,8 @@ export default function Home() {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const chatHistory = [...conversation, { role: 'user', content: value }];
-      const response = await fetch('/api/openAIChat', {
+      const chatHistory = [...conversation, { role: 'assistant', content: value }];
+      const response = await fetch('/api/gpt', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default function Home() {
       setValue('');
       setConversation([
         ...chatHistory,
-        { role: 'assistant', content: data.result.choices[0].message.content },
+        { role: 'user', content: data.item },
       ]);
     }
   };
@@ -52,7 +52,7 @@ export default function Home() {
         <p className="mb-6 font-bold">Please type your prompt</p>
         <input
           placeholder="Type here"
-          className="w-full max-w-xs input input-bordered input-secondary"
+          className="w-full max-w-xs input input-bordered input-secondary dark:bg-slate-800"
           value={value}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
@@ -68,7 +68,7 @@ export default function Home() {
         {conversation.map((item, index) => (
           <React.Fragment key={index}>
             <br />
-            {item.role === 'assistant' ? (
+            {item.role === 'user' ? (
               <div>
                 <div>
                   <strong>AI Assistant</strong>

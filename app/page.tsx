@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col items-center justify-center w-2/3 mx-auto mt-40 text-center">
+      <div className="flex flex-col items-center justify-center w-2/3 mx-auto mt-40 text-center min-h-screen">
         <h1 className="font-bold text-4xl">Hi, I am your AI assistant</h1>
         <div className="my-12">
           <p className="mb-6 font-bold">How can I help you?</p>
@@ -65,7 +65,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className=" max-w-4xl mx-auto space-y-12 grid grid-cols-1">
+        <div className="textarea max-w-4xl mx-auto space-y-12 grid grid-cols-1">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
               <br />
